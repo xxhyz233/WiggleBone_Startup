@@ -13,7 +13,7 @@ import { WiggleBone } from "wiggle/spring";
 let cameraPersp, currentCamera;
 let scene, renderer, control, orbit;
 let mouseX = 0, mouseY = 0;
-let modelRoot = null;
+let rootBone = null;
 let windowHalfX = window.innerWidth / 2;
 let windowHalfY = window.innerHeight / 2;
 
@@ -65,8 +65,7 @@ function init() {
     });
     scene.add(helper);
 
-    const rootBone = scene.getObjectByName("Root");
-    modelRoot = rootBone; // Store reference to the root bone
+    rootBone = scene.getObjectByName("Root");
     const b1 = scene.getObjectByName("Bone1");
     const b2 = scene.getObjectByName("Bone2");
     const b3 = scene.getObjectByName("Bone3");
@@ -112,12 +111,12 @@ function loop() {
   requestAnimationFrame(loop);
   
   // 鼠标位置更新
-  if (modelRoot) {
+  if (rootBone) {
     const targetX = mouseX * 5;
     const targetY = mouseY * 2.5;
     
-    modelRoot.position.x += (targetX - modelRoot.position.x) * 0.1; // 平滑系数
-    modelRoot.position.y += (targetY - modelRoot.position.y) * 0.1;
+    rootBone.position.x += (targetX - rootBone.position.x) * 0.1; // 平滑系数
+    rootBone.position.y += (targetY - rootBone.position.y) * 0.1;
   }
   
   wiggleBones.forEach((wb) => wb.update());
