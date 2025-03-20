@@ -12,6 +12,10 @@ import { WiggleBone } from "wiggle/spring";
 
 let cameraPersp, currentCamera;
 let scene, renderer, control, orbit;
+let mouseX = 0, mouseY = 0;
+let modelRoot = null;
+let windowHalfX = window.innerWidth / 2;
+let windowHalfY = window.innerHeight / 2;
 
 const loader = new GLTFLoader();
 
@@ -62,6 +66,7 @@ function init() {
     scene.add(helper);
 
     const rootBone = scene.getObjectByName("Root");
+    modelRoot = rootBone; // Store reference to the root bone
     const b1 = scene.getObjectByName("Bone1");
     const b2 = scene.getObjectByName("Bone2");
     const b3 = scene.getObjectByName("Bone3");
@@ -78,11 +83,22 @@ function init() {
   });
   scene.add(control.getHelper());
 
+  // 监听
+  document.addEventListener('mousemove', onDocumentMouseMove);
+  
   window.addEventListener("resize", onWindowResize);
+}
+
+function onDocumentMouseMove(event) {
+  // 正太化
+  mouseX = (event.clientX / window.innerWidth) * 2 - 1;
+  mouseY = -(event.clientY / window.innerHeight) * 2 + 1;
 }
 
 function onWindowResize() {
   const aspect = window.innerWidth / window.innerHeight;
+  windowHalfX = window.innerWidth / 2;
+  windowHalfY = window.innerHeight / 2;
 
   cameraPersp.aspect = aspect;
   cameraPersp.updateProjectionMatrix();
@@ -94,6 +110,16 @@ function onWindowResize() {
 
 function loop() {
   requestAnimationFrame(loop);
+  
+  // 鼠标位置更新
+  if (modelRoot) {
+    const targetX = mouseX * 5;
+    const targetY = mouseY * 2.5;
+    
+    modelRoot.position.x += (targetX - modelRoot.position.x) * 0.1; // 平滑系数
+    modelRoot.position.y += (targetY - modelRoot.position.y) * 0.1;
+  }
+  
   wiggleBones.forEach((wb) => wb.update());
   render();
 }
