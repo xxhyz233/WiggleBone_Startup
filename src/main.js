@@ -55,11 +55,11 @@ function init() {
     orbit.enabled = !event.value;
   });
 
-  loader.load("/demo.glb", (gltf) => {
+  loader.load("/Poop.glb", (gltf) => {
     scene.add(gltf.scene);
 
     const helper = new WiggleRigHelper({
-      skeleton: scene.getObjectByName("Stick").skeleton,
+      skeleton: scene.getObjectByName("Poop").skeleton,
       dotSize: 0.2,
       lineWidth: 0.02,
     });
@@ -69,13 +69,15 @@ function init() {
     const b1 = scene.getObjectByName("Bone1");
     const b2 = scene.getObjectByName("Bone2");
     const b3 = scene.getObjectByName("Bone3");
+    const b4 = scene.getObjectByName("Bone4");
 
     // wiggleBones.push(new WiggleBone(b1, { velocity: 0.2 }));
     // wiggleBones.push(new WiggleBone(b2, { velocity: 0.2 }));
     // wiggleBones.push(new WiggleBone(b3, { velocity: 0.2 }));
-    wiggleBones.push(new WiggleBone(b1, { stiffness: 700, damping: 28 }));
-    wiggleBones.push(new WiggleBone(b2, { stiffness: 700, damping: 28 }));
-    wiggleBones.push(new WiggleBone(b3, { stiffness: 700, damping: 28 }));
+    wiggleBones.push(new WiggleBone(b1, { stiffness: 1200, damping: 34 }));
+    wiggleBones.push(new WiggleBone(b2, { stiffness: 1200, damping: 34 }));
+    wiggleBones.push(new WiggleBone(b3, { stiffness: 1200, damping: 34 }));
+    wiggleBones.push(new WiggleBone(b4, { stiffness: 1200, damping: 34 }));
 
     control.attach(rootBone);
     control.showY = false;
