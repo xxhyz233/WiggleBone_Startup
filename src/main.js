@@ -4,6 +4,7 @@ import * as THREE from "three";
 
 import { OrbitControls } from "three/examples/jsm/controls/OrbitControls";
 import { TransformControls } from 'three/examples/jsm/controls/TransformControls.js';
+
 import { GLTFLoader } from "three/examples/jsm/loaders/GLTFLoader";
 import { WiggleRigHelper } from "wiggle/helper";
 // import { WiggleBone } from "wiggle";
@@ -75,7 +76,7 @@ function init() {
     control.attach(rootBone);
     control.showY = false;
   });
-  scene.add(control);
+  scene.add(control.getHelper());
 
   window.addEventListener("resize", onWindowResize);
 }
