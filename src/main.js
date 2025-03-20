@@ -1,13 +1,13 @@
-// import "../style.css";
+import "./style.css";
 
-// import * as THREE from "../node_modules/three";
+import * as THREE from "three";
 
-// import { OrbitControls } from "../node_modules/three/examples/jsm/controls/OrbitControls";
-// import { TransformControls } from "./node_modules/three/examples/jsm/controls/TransformControls";
-// import { GLTFLoader } from "./node_modules/three/examples/jsm/loaders/GLTFLoader";
-// import { WiggleRigHelper } from "./node_modules/wiggle/helper";
-// // import { WiggleBone } from "wiggle";
-// import { WiggleBone } from "./node_modules/wiggle/spring";
+import { OrbitControls } from "three/examples/jsm/controls/OrbitControls";
+import { TransformControls } from 'three/examples/jsm/controls/TransformControls.js';
+import { GLTFLoader } from "three/examples/jsm/loaders/GLTFLoader";
+import { WiggleRigHelper } from "wiggle/helper";
+// import { WiggleBone } from "wiggle";
+import { WiggleBone } from "wiggle/spring";
 
 let cameraPersp, currentCamera;
 let scene, renderer, control, orbit;
@@ -95,4 +95,10 @@ function loop() {
   requestAnimationFrame(loop);
   wiggleBones.forEach((wb) => wb.update());
   render();
+}
+
+loop();
+
+function render() {
+  renderer.render(scene, currentCamera);
 }

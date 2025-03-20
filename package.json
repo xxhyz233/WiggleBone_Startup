@@ -1,5 +1,9 @@
 {
   "dependencies": {
+    "three": "^0.174.0",
     "wiggle": "^0.0.17"
+  },
+  "devDependencies": {
+    "vite": "^6.2.2"
   }
 }
